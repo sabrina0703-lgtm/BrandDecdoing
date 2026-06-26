@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>{{BRAND_NAME}} 品牌生意深度分析报告</title>
+<style>
+/* ===== LV Luxury Style — Color System ===== */
+:root {
+  --brown: #3E2D1C;
+  --brown-mid: #5C4B3A;
+  --brown-light: #8B7355;
+  --gold: #C5A572;
+  --gold-light: #D4B98C;
+  --gold-pale: #E8D5B0;
+  --ivory: #F5F0E8;
+  --ivory-light: #FAF7F2;
+  --cream: #EDE6D8;
+  --charcoal: #1a1a1a;
+  --text: #2C2C2C;
+  --text-soft: #6B6B6B;
+  --border: #D4C9B8;
+  --green: #6B8E6B;
+  --red: #8B3A3A;
+  --orange: #A0522D;
+  --blue: #5A7A8A;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Noto Serif SC", "Cormorant Garamond", "Source Han Serif SC", serif;
+  background: var(--ivory);
+  color: var(--text);
+  line-height: 1.85;
+  font-size: 15px;
+}
+.container { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== Cover ===== */
+.cover {
+  background: var(--brown);
+  color: var(--ivory); padding: 90px 60px; text-align: center; margin-bottom: 0;
+  border-bottom: 3px solid var(--gold);
+  position: relative;
+}
+.cover::before {
+  content: '';
+  position: absolute; top: 30px; left: 30px; right: 30px; bottom: 30px;
+  border: 1px solid var(--gold); opacity: 0.4; pointer-events: none;
+}
+.cover h1 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif; font-size: 34px; margin-bottom: 12px;
+  letter-spacing: 6px; font-weight: 400; text-transform: uppercase;
+  color: var(--gold-light);
+}
+.cover .subtitle {
+  font-size: 17px; color: var(--ivory); opacity: 0.75; margin-bottom: 36px;
+  letter-spacing: 2px;
+}
+.cover .meta { font-size: 13px; opacity: 0.55; line-height: 2.2; letter-spacing: 1px; }
+.cover .brand-tag {
+  display: inline-block; border: 1px solid var(--gold);
+  padding: 10px 28px; margin-bottom: 24px; font-size: 15px;
+  letter-spacing: 3px; color: var(--gold-light);
+}
+
+/* ===== Navigation ===== */
+.toc {
+  background: var(--ivory-light); padding: 32px 48px;
+  border-bottom: 1px solid var(--gold); margin-bottom: 0;
+}
+.toc h2 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif; color: var(--brown); font-size: 18px;
+  margin-bottom: 16px; letter-spacing: 4px; text-transform: uppercase;
+}
+.toc ol { padding-left: 20px; }
+.toc li { margin-bottom: 7px; font-size: 14px; }
+.toc a { color: var(--brown-light); text-decoration: none; letter-spacing: 0.5px; }
+.toc a:hover { color: var(--brown); text-decoration: underline; }
+
+/* ===== Sections ===== */
+.section {
+  background: var(--ivory-light); margin: 24px 0; padding: 44px 40px;
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--gold);
+}
+.section h2 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif; color: var(--brown); font-size: 21px;
+  padding-bottom: 12px; margin-bottom: 22px;
+  border-bottom: 1px solid var(--gold); letter-spacing: 3px;
+}
+.section h3 {
+  color: var(--brown-mid); font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-size: 16px; margin: 28px 0 14px;
+  padding-left: 14px; border-left: 2px solid var(--gold);
+  letter-spacing: 1px;
+}
+.section h4 {
+  color: var(--brown-light); font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-size: 15px; margin: 20px 0 10px; letter-spacing: 1px;
+}
+
+/* ===== Mini Conclusion ===== */
+.mini-conclusion {
+  background: var(--cream); border-left: 2px solid var(--gold);
+  padding: 16px 22px; margin: 18px 0; color: var(--text);
+}
+.mini-conclusion strong { color: var(--brown); font-family: "Cormorant Garamond", "Noto Serif SC", serif; }
+
+/* ===== Key Finding ===== */
+.key-finding {
+  background: var(--ivory); border-left: 2px solid var(--gold);
+  padding: 14px 20px; margin: 14px 0;
+  font-weight: 500; color: var(--text);
+}
+.key-finding .num { color: var(--brown); font-weight: 700; }
+
+/* ===== Tables ===== */
+table {
+  width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13.5px;
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+}
+th {
+  background: var(--brown); color: var(--ivory); padding: 11px 14px;
+  text-align: left; font-weight: 400; letter-spacing: 1px;
+  font-size: 12px; border-bottom: 2px solid var(--gold);
+}
+td {
+  padding: 9px 14px; border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+tr:nth-child(even) { background: var(--ivory); }
+tr:hover { background: var(--cream); }
+
+/* ===== SWOT ===== */
+.swot-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0;
+}
+.swot-box { padding: 16px; border-radius: 0; }
+.swot-s { background: var(--ivory); border: 1px solid var(--green); border-left: 3px solid var(--green); }
+.swot-w { background: var(--ivory); border: 1px solid var(--red); border-left: 3px solid var(--red); }
+.swot-o { background: var(--ivory); border: 1px solid var(--blue); border-left: 3px solid var(--blue); }
+.swot-t { background: var(--ivory); border: 1px solid var(--orange); border-left: 3px solid var(--orange); }
+.swot-box h4 {
+  margin-bottom: 10px; font-size: 14px; font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  letter-spacing: 1px; color: var(--brown);
+}
+.swot-box ul { padding-left: 16px; font-size: 13px; }
+.swot-box li { margin-bottom: 5px; }
+
+/* ===== Strategy Cards ===== */
+.strategy-card {
+  padding: 20px; margin: 14px 0; background: var(--ivory-light);
+}
+.p0 { border: 1px solid var(--red); border-left: 3px solid var(--red); }
+.p1 { border: 1px solid var(--orange); border-left: 3px solid var(--orange); }
+.p2 { border: 1px solid var(--green); border-left: 3px solid var(--green); }
+.strategy-card .tag {
+  display: inline-block; padding: 3px 12px;
+  font-size: 11px; font-weight: 400; letter-spacing: 1.5px;
+  color: var(--ivory); margin-bottom: 10px;
+  border: 1px solid currentColor;
+}
+.p0 .tag { background: var(--red); }
+.p1 .tag { background: var(--orange); }
+.p2 .tag { background: var(--green); }
+
+/* ===== Score ===== */
+.score-table td:first-child { font-weight: 600; font-family: "Cormorant Garamond", "Noto Serif SC", serif; }
+.score-bar {
+  display: inline-block; height: 16px; background: var(--gold);
+  vertical-align: middle; margin-right: 6px;
+}
+
+/* ===== Risk ===== */
+.risk-item {
+  display: flex; align-items: center; gap: 10px; padding: 10px;
+  border-bottom: 1px solid var(--border); font-size: 13.5px;
+}
+.risk-level {
+  padding: 2px 10px; font-size: 11px; font-weight: 400;
+  letter-spacing: 1px; color: var(--ivory);
+  min-width: 50px; text-align: center;
+}
+.risk-high { background: var(--red); }
+.risk-medium { background: var(--orange); }
+.risk-low { background: var(--green); }
+
+/* ===== Source & Estimate ===== */
+.source { font-size: 11px; color: var(--text-soft); margin-top: 2px; font-style: italic; }
+.estimate { color: var(--orange); font-size: 12px; }
+
+/* ===== Radar Placeholder ===== */
+.radar-note {
+  text-align: center; padding: 20px; background: var(--ivory);
+  border: 1px solid var(--border); color: var(--text-soft); font-size: 13px;
+}
+
+/* ===== Summary Cards ===== */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 22px 0;
+}
+.summary-card {
+  background: var(--ivory-light);
+  border: 1px solid var(--border);
+  padding: 20px 18px;
+  border-top: 2px solid var(--gold);
+}
+.summary-label {
+  font-size: 11px; color: var(--brown-light);
+  text-transform: uppercase; letter-spacing: 2px;
+  margin-bottom: 10px; font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+}
+.summary-value {
+  font-size: 17px; font-weight: 400; color: var(--brown);
+  line-height: 1.4; margin-bottom: 8px; font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  letter-spacing: 0.5px;
+}
+.summary-sub {
+  font-size: 13px; font-weight: 400; color: var(--text-soft);
+}
+.summary-detail {
+  font-size: 13px; color: var(--text-soft); line-height: 1.6;
+}
+@media (max-width: 700px) {
+  .summary-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== Sidebar Navigation ===== */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0; width: 250px; height: 100vh;
+  overflow-y: auto;
+  background: var(--brown);
+  z-index: 1000;
+  border-right: 1px solid var(--gold);
+  transition: transform 0.3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-pale) transparent;
+}
+.sidebar::-webkit-scrollbar { width: 5px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--gold-pale); border-radius: 3px; }
+.sidebar-header {
+  padding: 22px 20px 16px;
+  border-bottom: 1px solid var(--gold); opacity: 0.6;
+  margin-bottom: 10px;
+}
+.sidebar-header .stitle {
+  color: var(--gold-light); font-size: 14px; font-weight: 400;
+  letter-spacing: 3px; font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+}
+.sidebar-header .ssub {
+  color: var(--ivory); font-size: 11px; margin-top: 6px;
+  opacity: 0.5; letter-spacing: 1px;
+}
+.sidebar nav { padding: 0 0 30px; }
+.sidebar nav a {
+  display: block; color: rgba(245,240,232,0.5);
+  text-decoration: none; padding: 7px 22px;
+  font-size: 12px; line-height: 1.5;
+  border-left: 2px solid transparent;
+  transition: all 0.2s; cursor: pointer;
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif; letter-spacing: 0.5px;
+}
+.sidebar nav a.nav-main {
+  font-weight: 400; color: var(--gold-pale);
+  margin-top: 10px; font-size: 12px;
+  padding-top: 9px; padding-bottom: 9px;
+  letter-spacing: 1px;
+}
+.sidebar nav a.nav-sub {
+  padding-left: 40px; font-size: 11px;
+  color: rgba(245,240,232,0.35);
+}
+.sidebar nav a:hover {
+  color: var(--gold-light);
+  background: rgba(197,165,114,0.08);
+}
+.sidebar nav a.active {
+  color: var(--gold-light);
+  background: rgba(197,165,114,0.12);
+  border-left-color: var(--gold);
+}
+.sidebar-toggle {
+  display: none; position: fixed; top: 15px; left: 15px;
+  z-index: 1001; background: var(--brown);
+  color: var(--gold-light); border: 1px solid var(--gold);
+  width: 42px; height: 42px; font-size: 18px;
+  cursor: pointer;
+}
+.sidebar-overlay {
+  display: none; position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(62,45,28,0.6); z-index: 999;
+}
+body { padding-left: 250px; }
+
+@media (max-width: 1024px) {
+  body { padding-left: 0; }
+  .sidebar { transform: translateX(-100%); width: 270px; }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-toggle { display: block; }
+  .sidebar-overlay.show { display: block; }
+}
+
+@media print {
+  body { background: white; padding-left: 0; }
+  .section { border: none; page-break-inside: avoid; }
+  .sidebar, .sidebar-toggle, .sidebar-overlay { display: none !important; }
+}
+
+/* ===== Business Model Canvas ===== */
+.canvas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 2px;
+  margin: 20px 0;
+  font-size: 13px;
+}
+.canvas-cell {
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  padding: 12px;
+  min-height: 80px;
+}
+.canvas-cell-title {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  color: var(--brown);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar Toggle (mobile) -->
+<button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.querySelector('.sidebar-overlay').classList.toggle('show')">&#9776;</button>
+<div class="sidebar-overlay" onclick="document.querySelector('.sidebar').classList.remove('open');this.classList.remove('show')"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="stitle">{{BRAND_NAME}}</div>
+    <div class="ssub">NAVIGATION</div>
+  </div>
+  <nav id="sidebar-nav"></nav>
+</aside>
+
+<div class="container">
+
+<!-- ===== COVER ===== -->
+<div class="cover">
+  <div class="brand-tag">{{BRAND_NAME_EN}}</div>
+  <h1>BRAND BUSINESS ANALYSIS</h1>
+  <div class="subtitle">{{BRAND_NAME}} 品牌生意深度分析报告</div>
+  <div class="meta">
+    分析日期: {{DATE}}<br>
+    分析版本: V3<br>
+    聚焦: {{BRAND_SCOPE}}<br>
+    CONFIDENTIAL
+  </div>
+</div>
+
+<!-- ===== BRAND PREVIEW (Business Model Canvas) ===== -->
+<div class="section" id="preview">
+  <h2>品牌画像（Preview）</h2>
+  <!-- 9-element Business Model Canvas table -->
+  <table>
+  <tr><th>要素</th><th>内容</th></tr>
+  <tr><td>客户细分</td><td>{{CANVAS_CUSTOMER}}</td></tr>
+  <tr><td>价值主张</td><td>{{CANVAS_VALUE}}</td></tr>
+  <tr><td>渠道</td><td>{{CANVAS_CHANNEL}}</td></tr>
+  <tr><td>客户关系</td><td>{{CANVAS_RELATION}}</td></tr>
+  <tr><td>收入来源</td><td>{{CANVAS_REVENUE}}</td></tr>
+  <tr><td>核心资源</td><td>{{CANVAS_RESOURCE}}</td></tr>
+  <tr><td>关键业务</td><td>{{CANVAS_ACTIVITY}}</td></tr>
+  <tr><td>重要伙伴</td><td>{{CANVAS_PARTNER}}</td></tr>
+  <tr><td>成本结构</td><td>{{CANVAS_COST}}</td></tr>
+  </table>
+</div>
+
+<!-- ===== SUMMARY ===== -->
+<div class="section" id="summary">
+  <h2>{{BRAND_NAME}} 现状概览（Summary）</h2>
+  <div class="summary-grid">
+    <!-- 9 summary cards -->
+    <div class="summary-card">
+      <div class="summary-label">BUSINESS SCALE</div>
+      <div class="summary-value">{{SUMMARY_SCALE}}</div>
+      <div class="summary-sub">{{SUMMARY_SCALE_SUB}}</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">GROWTH RATE</div>
+      <div class="summary-value">{{SUMMARY_GROWTH}}</div>
+      <div class="summary-sub">{{SUMMARY_GROWTH_SUB}}</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">MARKET SHARE</div>
+      <div class="summary-value">{{SUMMARY_SHARE}}</div>
+      <div class="summary-sub">{{SUMMARY_SHARE_SUB}}</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">CORE USER</div>
+      <div class="summary-value">{{SUMMARY_USER}}</div>
+      <div class="summary-sub">{{SUMMARY_USER_SUB}}</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">CITY</div>
+      <div class="summary-value">{{SUMMARY_CITY}}</div>
+      <div class="summary-sub">{{SUMMARY_CITY_SUB}}</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">CHANNEL</div>
+      <div class="summary-value">{{SUMMARY_CHANNEL}}</div>
+      <div class="summary-sub">{{SUMMARY_CHANNEL_SUB}}</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">AVG PRICE</div>
+      <div class="summary-value">{{SUMMARY_PRICE}}</div>
+      <div class="summary-sub">{{SUMMARY_PRICE_SUB}}</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">CORE PRODUCT</div>
+      <div class="summary-value">{{SUMMARY_PRODUCT}}</div>
+      <div class="summary-sub">{{SUMMARY_PRODUCT_SUB}}</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">BRAND POSITIONING</div>
+      <div class="summary-value">{{SUMMARY_POSITIONING}}</div>
+      <div class="summary-sub">{{SUMMARY_POSITIONING_SUB}}</div>
+    </div>
+  </div>
+  <div class="mini-conclusion">
+    <strong>一句话概括：</strong>{{SUMMARY_ONE_LINE}}
+  </div>
+</div>
+
+<!-- ===== TOC ===== -->
+<div class="toc">
+  <h2>CONTENTS</h2>
+  <ol>
+    <li><a href="#preview">品牌画像（Preview）</a></li>
+    <li><a href="#summary">{{BRAND_NAME}} 现状概览（Summary）</a></li>
+    <li><a href="#m1">模块1：宏观环境分析（PEST）</a></li>
+    <li><a href="#m2">模块2：行业洞察</a></li>
+    <li><a href="#m3">模块3：品牌洞察（4P框架）</a></li>
+    <li><a href="#m4">模块4：用户洞察</a></li>
+    <li><a href="#m5">模块5：竞争格局</a></li>
+    <li><a href="#m6">模块6：财务与增长</a></li>
+    <li><a href="#m7">模块7：综合诊断</a></li>
+    <li><a href="#appendix">附录：数据来源清单</a></li>
+  </ol>
+</div>
+
+<!-- ===== MODULE 1: PEST ===== -->
+<div class="section" id="m1">
+  <h2>模块1：宏观环境分析（PEST）</h2>
+
+  <h3 id="m1-p">1.1 政策环境（Political）</h3>
+  {{M1_POLITICAL}}
+
+  <h3 id="m1-e">1.2 经济环境（Economic）</h3>
+  {{M1_ECONOMIC}}
+
+  <h3 id="m1-s">1.3 社会环境（Social）</h3>
+  {{M1_SOCIAL}}
+
+  <h3 id="m1-t">1.4 技术环境（Technological）</h3>
+  {{M1_TECH}}
+
+  <div class="mini-conclusion">
+    <strong>本节小结：</strong>{{M1_CONCLUSION}}
+  </div>
+</div>
+
+<!-- ===== MODULE 2: INDUSTRY ===== -->
+<div class="section" id="m2">
+  <h2>模块2：行业洞察</h2>
+
+  <h3 id="m2-tam">2.1 市场规模（TAM-SAM-SOM）</h3>
+  {{M2_TAM}}
+
+  <h3 id="m2-cycle">2.2 行业生命周期判断</h3>
+  {{M2_CYCLE}}
+
+  <h3 id="m2-cr5">2.3 市场集中度与竞争结构</h3>
+  {{M2_CR5}}
+
+  <h3 id="m2-porter">2.4 波特五力评估</h3>
+  {{M2_PORTER}}
+
+  <h3 id="m2-ksf">2.5 关键成功要素（KSF）</h3>
+  {{M2_KSF}}
+
+  <div class="mini-conclusion">
+    <strong>本节小结：</strong>{{M2_CONCLUSION}}
+  </div>
+</div>
+
+<!-- ===== MODULE 3: BRAND (4P) ===== -->
+<div class="section" id="m3">
+  <h2>模块3：品牌洞察（4P框架）</h2>
+
+  <h3 id="m3-pos">3.1 品牌定位与金字塔</h3>
+  {{M3_POSITIONING}}
+
+  <h3 id="m3-bcg">3.2 产品矩阵（BCG分析）</h3>
+  {{M3_BCG_SVG}}
+
+  <h3 id="m3-price">3.3 价格策略</h3>
+  {{M3_PRICE}}
+
+  <h3 id="m3-channel">3.4 渠道结构</h3>
+  {{M3_CHANNEL}}
+
+  <h3 id="m3-promo">3.5 推广效率</h3>
+  {{M3_PROMO}}
+
+  <h3 id="m3-niche">3.6 品牌生态位</h3>
+  {{M3_NICHE_SVG}}
+
+  <div class="mini-conclusion">
+    <strong>本节小结：</strong>{{M3_CONCLUSION}}
+  </div>
+</div>
+
+<!-- ===== MODULE 4: USER ===== -->
+<div class="section" id="m4">
+  <h2>模块4：用户洞察</h2>
+
+  <h3 id="m4-profile">4.1 用户画像</h3>
+  {{M4_PROFILE}}
+
+  <h3 id="m4-5a">4.2 5A模型与消费者旅程</h3>
+  {{M4_5A}}
+
+  <h3 id="m4-jtbd">4.3 JTBD与需求金字塔</h3>
+  {{M4_JTBD}}
+
+  <div class="mini-conclusion">
+    <strong>本节小结：</strong>{{M4_CONCLUSION}}
+  </div>
+</div>
+
+<!-- ===== MODULE 5: COMPETITION ===== -->
+<div class="section" id="m5">
+  <h2>模块5：竞争格局</h2>
+
+  <h3 id="m5-tier">5.1 竞品全景（三级分层）</h3>
+  {{M5_TIER}}
+
+  <h3 id="m5-radar">5.2 竞品雷达图对比</h3>
+  {{M5_RADAR}}
+
+  <h3 id="m5-group">5.3 战略群组图定位</h3>
+  {{M5_GROUP_SVG}}
+
+  <div class="mini-conclusion">
+    <strong>本节小结：</strong>{{M5_CONCLUSION}}
+  </div>
+</div>
+
+<!-- ===== MODULE 6: FINANCE ===== -->
+<div class="section" id="m6">
+  <h2>模块6：财务与增长</h2>
+
+  <h3 id="m6-finance">6.1 财务表现</h3>
+  {{M6_FINANCE}}
+
+  <h3 id="m6-growth">6.2 增长动力拆解</h3>
+  {{M6_GROWTH}}
+
+  <h3 id="m6-ue">6.3 UE模型与第二增长曲线</h3>
+  {{M6_UE}}
+
+  <div class="mini-conclusion">
+    <strong>本节小结：</strong>{{M6_CONCLUSION}}
+  </div>
+</div>
+
+<!-- ===== MODULE 7: DIAGNOSIS ===== -->
+<div class="section" id="m7">
+  <h2>模块7：综合诊断</h2>
+
+  <h3 id="m7-swot">7.1 SWOT战略矩阵</h3>
+  <div class="swot-grid">
+    <div class="swot-box swot-s">
+      <h4>S — 优势 (Strengths)</h4>
+      <ul>{{M7_S_LIST}}</ul>
+    </div>
+    <div class="swot-box swot-w">
+      <h4>W — 劣势 (Weaknesses)</h4>
+      <ul>{{M7_W_LIST}}</ul>
+    </div>
+    <div class="swot-box swot-o">
+      <h4>O — 机会 (Opportunities)</h4>
+      <ul>{{M7_O_LIST}}</ul>
+    </div>
+    <div class="swot-box swot-t">
+      <h4>T — 威胁 (Threats)</h4>
+      <ul>{{M7_T_LIST}}</ul>
+    </div>
+  </div>
+  {{M7_CROSS_STRATEGY}}
+
+  <h3 id="m7-conclusion">7.2 核心结论</h3>
+  {{M7_THREE_SENTENCES}}
+
+  <h3 id="m7-strategy">7.3 策略建议（P0/P1/P2）</h3>
+  {{M7_P0}}
+  {{M7_P1}}
+  {{M7_P2}}
+
+  <h3 id="m7-score">7.4 商业模式健康度评分</h3>
+  {{M7_SCORE}}
+
+  <h3 id="m7-risk">7.5 风险预警清单</h3>
+  {{M7_RISK}}
+</div>
+
+<!-- ===== APPENDIX ===== -->
+<div class="section" id="appendix">
+  <h2>附录：数据来源清单</h2>
+  {{APPENDIX_TABLE}}
+</div>
+
+</div>
+
+<!-- ===== Sidebar Navigation JS ===== -->
+<script>
+(function(){
+  // 1. Build sidebar nav from sections
+  var nav = document.getElementById('sidebar-nav');
+  var sections = document.querySelectorAll('.section');
+  var navItems = [];
+
+  sections.forEach(function(section){
+    var h2 = section.querySelector('h2');
+    if(!h2) return;
+    var sid = section.id;
+    var shortTitle = h2.textContent.trim();
+
+    // Main link
+    var a = document.createElement('a');
+    a.href = '#' + sid;
+    a.className = 'nav-main';
+    a.textContent = shortTitle;
+    a.dataset.target = sid;
+    nav.appendChild(a);
+    navItems.push({el: section, link: a});
+
+    // Sub links
+    section.querySelectorAll('h3').forEach(function(h3){
+      var sa = document.createElement('a');
+      sa.href = '#' + h3.id;
+      sa.className = 'nav-sub';
+      sa.textContent = h3.textContent;
+      sa.dataset.target = h3.id;
+      nav.appendChild(sa);
+      navItems.push({el: h3, link: sa});
+    });
+  });
+
+  // 2. Scroll-spy — highlight current section
+  function updateActive(){
+    var pos = window.scrollY + 120;
+    var current = null;
+    navItems.forEach(function(item){
+      if(item.el.offsetTop <= pos) current = item;
+    });
+    navItems.forEach(function(item){ item.link.classList.remove('active'); });
+    if(current){
+      current.link.classList.add('active');
+      var sidebar = document.querySelector('.sidebar');
+      var linkTop = current.link.offsetTop;
+      var linkBottom = linkTop + current.link.offsetHeight;
+      if(linkTop < sidebar.scrollTop + 60){
+        sidebar.scrollTo({top: linkTop - 60, behavior: 'smooth'});
+      } else if(linkBottom > sidebar.scrollTop + sidebar.clientHeight - 60){
+        sidebar.scrollTo({top: linkBottom - sidebar.clientHeight + 60, behavior: 'smooth'});
+      }
+    }
+  }
+
+  // 3. Smooth scroll on click + close mobile sidebar
+  navItems.forEach(function(item){
+    item.link.addEventListener('click', function(e){
+      e.preventDefault();
+      var target = document.getElementById(this.dataset.target);
+      if(target){
+        window.scrollTo({top: target.offsetTop - 15, behavior: 'smooth'});
+      }
+      document.querySelector('.sidebar').classList.remove('open');
+      document.querySelector('.sidebar-overlay').classList.remove('show');
+    });
+  });
+
+  // Throttled scroll listener
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if(!ticking){
+      requestAnimationFrame(function(){
+        updateActive();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  updateActive();
+})();
+</script>
+
+</body>
+</html>
